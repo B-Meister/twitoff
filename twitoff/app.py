@@ -11,8 +11,6 @@ def create_app():
     DB.init_app(app)
     # ^ heres the database
 
-
-
     # ... TODO make the app!
     @app.route('/')
     def root():
@@ -22,10 +20,10 @@ def create_app():
     @app.route('/update')
     def update():
         # Reset the database
-    DB.drop_all()
-    DB.create_all()
-    insert_example_users()
-    return render_template('base.html', title='Users updated!',
-                           users=User.query.all())
+        DB.drop_all()
+        DB.create_all()
+        insert_example_users()
+        return render_template('base.html', title='Users updated!',
+                               users=User.query.all())
 
     return app
