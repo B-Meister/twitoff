@@ -20,7 +20,7 @@ class Tweet(DB.Model):
     id = DB.Column(DB.BigInteger, primary_key=True)
     text = DB.Column(DB.Unicode(300))  # Allows for texts + links
     # user_id is the foreign key
-    user_id = DB.Column(DB.BigInteger, DB.ForeignKey('user_id'), nullable=False)
+    user_id = DB.Column(DB.BigInteger, DB.ForeignKey('user.id'), nullable=False)
     user = DB.relationship('User', backref=DB.backref('tweets', lazy=True))
     # ^ no longer need to use join because of this line
 
@@ -34,7 +34,11 @@ def insert_example_users():
         more for testing purposes """
     austen = User(id=1, name='austen')
     elon = User(id=2, name='elonmusk')
+    bernie = User(id=3, name='bernie')
+    mrrogers = User(id=4, name='Fred Rogers')
     DB.session.add(austen)
     DB.session.add(elon)
+    DB.session.add(bernie)
+    DB.session.add(mrrogers)
     DB.session.commit()
 

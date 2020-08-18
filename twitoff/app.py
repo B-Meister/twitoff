@@ -1,12 +1,12 @@
 """ Main app/routing file for Twitoff """
-from flask import Flask
-from .models import DB, User
+from flask import Flask, render_template
+from .models import DB, User, insert_example_users
 
 
 def create_app():
     """Create and configure an instance of the Flask application"""
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URL'] = 'sqlite:///db.sqlite3'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     DB.init_app(app)
     # ^ heres the database
