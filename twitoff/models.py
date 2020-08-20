@@ -23,8 +23,10 @@ class Tweet(DB.Model):
     text = DB.Column(DB.Unicode(300))  # Allows for texts + links
     embedding = DB.Column(DB.PickleType, nullable=False)
     # user_id is the foreign key
-    user_id = DB.Column(DB.BigInteger, DB.ForeignKey('user.id'), nullable=False)
-    user = DB.relationship('User', backref=DB.backref('tweets', lazy=True))
+    user_id = DB.Column(DB.BigInteger, DB.ForeignKey('user.id'),
+                        nullable=False)
+    user = DB.relationship('User', backref=DB.backref('tweets',
+                                                      lazy=True))
     # ^ no longer need to use join because of this line
 
     def __repr__(self):
