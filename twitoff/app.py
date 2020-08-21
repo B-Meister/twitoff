@@ -1,4 +1,5 @@
 """ Main app/routing file for Twitoff """
+from os import getenv
 from flask import Flask, render_template, request
 from .models import DB, User
 from .twitter import insert_example_users, add_or_update_user
@@ -8,11 +9,11 @@ from .predict import predict_user
 def create_app():
     """Create and configure an instance of the Flask application"""
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
+    app.config['SQLALCHEMY_DATABASE_URI'] = getenv('DATABASE_URL')
+    # sqlite3 is for local - in heroku, will use PostgreSQL
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     DB.init_app(app)
-
-    # ^ heres the database
+    # ^ here is the database
 
     # ... TODO make the app!
     @app.route('/')
